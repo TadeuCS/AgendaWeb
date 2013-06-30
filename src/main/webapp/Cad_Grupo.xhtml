@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./Template.xhtml">
+
+            <ui:define name="centro">
+                <h:form id="Cad">
+                    <p:panel header="Cadastro de Grupos" >
+
+                        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                        <h:panelGrid columns="2" style="margin-right: 65%">
+                            <p:outputLabel value="Descrição:" for="descricao"/>
+                            <p:inputText id="descricao" value="#{grupoMB.grupo.descricao}" title="Descricao" required="true" requiredMessage="Campo Grupo invalido" style="float: left"> 
+                                <f:validateLength minimum="4" maximum="12"/>
+                            </p:inputText>
+                        </h:panelGrid>
+                    </p:panel> 
+                    <p:commandButton value="Salvar" action="#{grupoMB.Salvar()}" ajax="false" style="float: right;bottom: 55px;right: 3%" icon="ui-icon-disk"/>
+
+                </h:form>
+                <h:form id="tbl">
+                    <p:panel header="Lista de Grupos" style="text-align: center">
+                        <p:dataTable value="#{grupoMB.listaDeGrupos()}" var="lg" paginator="true" emptyMessage="Lista Vazia">
+                            <p:column headerText="Codigo">
+                                <h:outputText value="#{lg.id}"/>
+                            </p:column>
+                            <p:column headerText="Descricao">
+                                <h:outputText value="#{lg.descricao}"/>
+                            </p:column>
+                            <p:column >
+                                <p:commandButton actionListener="#{grupoMB.setGrupo(lg)}" update="@all" icon="ui-icon-pencil"/>
+                                <p:commandButton actionListener="#{grupoMB.Excluir(lg)}"  ajax="false" icon="ui-icon-trash"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

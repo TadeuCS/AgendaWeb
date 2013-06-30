@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./Template.xhtml">
+
+
+
+            <ui:define name="centro">
+                <h:form>
+                    <p:growl id="msgs" showDetail="true" /> 
+                    <p:panel header="Lista de Movimentações" style="text-align: center">
+                        <p:dataTable value="#{movimentosMB.listaDeMovimentacao()}" var="list" paginator="true" emptyMessage="Lista Vazia" >
+
+                            <p:column   headerText="Codigo">
+                                <h:outputText value="#{list.id}"/>
+                            </p:column>
+                            <p:column  headerText="Tipo" filterBy="#{list.tipoMovimento}" >
+                                <h:outputText value="#{list.tipoMovimento}"/>
+                            </p:column>
+                            <p:column  headerText="Descrição" filterBy="#{list.descricao}">
+                                <h:outputText value="#{list.descricao}"/>
+                            </p:column>
+                            <p:column  headerText="Data" >
+                                <h:outputText value="#{list.DT_Movimento}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column  headerText="Valor" >
+                                <h:outputText value="#{list.valor}"/>
+                            </p:column>
+                            <p:column >
+                                
+                                <p:commandButton  actionListener="#{movimentosMB.Excluir(list)}" ajax="false" icon="ui-icon-trash"/>
+                                    <p:commandButton id="selectButton" update="@all" oncomplete="carDialog.show()" icon="ui-icon-search" title="View">  
+                                        <f:setPropertyActionListener value="#{list}" target="#{movimentosMB.movimentacao.id}" />  
+                                </p:commandButton>  
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                    <p:dialog header="Movimentação" widgetVar="carDialog" id="carDlg"  
+                              showEffect="fade" hideEffect="explode" modal="false">  
+
+                        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
+
+
+                            <h:outputText value="ID:" />  
+                            <h:outputText value="#{list.id}" style="font-weight:bold"/>  
+
+                            <h:outputText value="Tipo:" />  
+                            <h:outputText value="#{list.tipoMovimento}" style="font-weight:bold"/>  
+
+
+                            <h:outputText value="Descrição:" />  
+                            <h:outputText value="#{list.descricao}" style="font-weight:bold"/>  
+
+                            <h:outputText value="Data:" />  
+                            <h:outputText value="#{list.DT_Movimento}" style="font-weight:bold">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+
+                        </h:panelGrid>  
+                        
+                    </p:dialog>
+                    <p:panel>
+                        
+                        
+                        <td>
+                            <h:outputText value="Total Crédito:  " />
+                            <h:outputText value="#{movimentosMB.credito}" style="font-size: 25px;color: blue"/>
+                        </td>
+                        <td>
+                            <h:outputText value="Total Débito:  "/>
+                            <h:outputText value="#{movimentosMB.debito}" style="font-size: 25px;color: blue"/>
+                        </td>
+                        <td>
+                            <h:outputText value="Total Liquido:  "/>
+                            <h:outputText value="#{movimentosMB.saldo}" style="font-size: 25px;color: blue"/>
+                        </td>
+                    
+                    </p:panel>
+                    
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

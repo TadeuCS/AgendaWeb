@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}./resources/css/Login.css"/>
+    </h:head>
+    <h:body>
+        <ui:composition template="./Template.xhtml">
+
+            <ui:define name="centro">
+                <p:panel header="Desenvolvedores">
+                    <img src="resources/IMG/feioso.jpg" width="364" height="414" alt="Tadeu"/>
+                    <img src="resources/IMG/feiosa.jpg" width="364" height="414" alt="Fabiana"/>
+                </p:panel>
+                <p:panel header="Informações Complementares">
+                    A certeza de que conceitos de gestão e planejamento não se aplicam somente ás empresas, mas também á vida de cada um. Ao utilizar conceitos matematicos elementares, podemos analisar nossa situação financeira, compromissos e planejar um pouco melhor o nosso futuro.
+                    <p/>
+	Assim foi desenvolvido esse sistema que visa armazenar, editar e excluir informações do gestor pessoal, a fim de ter um sistema para cadastrar contatos, movimentações e compromissos do dia a dia. E assim manter uma vida mais organizada!
+	Desenvolvido pelos alunos Fabiana S.D e Tadeu C.S.,estudantes do 5º periodo de sistemas de Infomação do Centro Universitario de Patos de Minas.
+                </p:panel>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

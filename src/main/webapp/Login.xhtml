@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}./resources/css/Login.css"/>
+    </h:head>
+    <h:body>
+        <div id="Logar">
+            
+            <h:form id="form">
+
+                <p:panel header="Login" style="width: 27%;position: absolute;top: 35%;left: 35%">
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                    <h:panelGrid columns="2">
+                        <p:outputLabel value="Usuario:" for="txt_usuarioLogado"/>
+                        <p:password value="#{usuarioMB.user.usuario}" id="txt_usuarioLogado" required="true" requiredMessage="Campo Usuario invalido"/>
+                        <p:outputLabel value="Senha:" for="txt_senhaLogado" style="float: right"/>
+                        <p:password value="#{usuarioMB.user.senha}" id="txt_senhaLogado" required="true" requiredMessage="Campo Senha invalido"/>
+                        <h:link value="Cadastrar" outcome="Cad_Usuario.xhtml" style="float: right"/>
+                        <p:commandButton value="Entrar" action="#{usuarioMB.salva()}" ajax="false" style="float: right"/>
+                    </h:panelGrid>
+
+                </p:panel>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

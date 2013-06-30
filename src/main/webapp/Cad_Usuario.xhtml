@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+
+
+        <p:panel id="pnl_cadUsuario" header="CADASTRO DE USUARIO">
+            <h:form id="create">
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                <h:panelGrid columns="1" border="0" cellpadding="3" id="matchGrid" >
+                    Nome: <p:inputText id="fname"       
+                                       value="#{usuarioMB.user.nome}"
+                                       maxlength="15"
+                                       required="true" requiredMessage="Campo Nome é obrigatorio!" />  
+                    Sobrenome: <p:inputText id="lname" 
+                                            maxlength="15"
+                                            requiredMessage="Campo Sobrenome é obrigatorio!"
+                                            value="#{usuarioMB.user.sobrenome}"
+                                            required="true"/>
+                    Usuario: <p:inputText id="username" 
+                                          maxlength="15"
+                                          requiredMessage="Campo Usuario é obrigatorio!"
+                                          value="#{usuarioMB.user.usuario}"/>
+                    <h:message for="username"/>
+
+                    Email: <p:inputText id="txt_email" 
+                                        requiredMessage="Campo Email é obrigatorio!"
+                                        value="#{usuarioMB.user.email}"
+                                        style="width: 350px"
+                                        required="true"/>
+
+                    Senha: <p:password id="password"
+
+                                       maxlength="48"
+                                       requiredMessage="Campo Senha é obrigatorio!"
+                                       value="#{usuarioMB.user.senha}"
+                                       required="true"
+                                       feedback="true" promptLabel="Informe uma Senha" weakLabel="Fraco"  
+                                       goodLabel="Bom" strongLabel="Forte" >
+                    </p:password>
+
+                    Senha (Confirmação): <p:password id="passwordv" 
+
+                                                     requiredMessage="Campo Senha (Confirmação) é obrigatorio!"
+                                                     value="#{usuarioMB.senha2}"
+                                                     maxlength="48"
+                                                     required="true"
+                                                     feedback="true" promptLabel="Informe uma Senha" weakLabel="Fraco"  
+                                                     goodLabel="Bom" strongLabel="Forte" >
+                    </p:password>
+
+                </h:panelGrid>
+                <h:panelGrid columns="2" cellpadding ="25">
+
+
+
+
+
+                </h:panelGrid>
+                <p:commandButton id="btn_cadastro" value="Salvar" action="#{usuarioMB.salva()}" ajax="false" update="matchGrid" style="position: relative;left:  155px"/>
+            </h:form>
+
+
+
+            <h:form>
+                <p:commandButton value="Login" action="Login.xhml" style="bottom: 45px;position: relative"/>
+                
+            </h:form>
+        </p:panel> 
+    </h:body>
+</html>
+

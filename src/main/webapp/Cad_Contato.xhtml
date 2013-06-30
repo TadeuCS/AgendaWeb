@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+        <ui:composition template="./Template.xhtml">
+
+            <ui:define name="centro">
+
+                <h:form id="Cad">
+                    <p:panel header="Cadastro de Contato">
+                        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                        <h:panelGrid columns="2" style="margin-right: 75%">
+
+                            <p:outputLabel value="Nome:" for="nome" style="float: right"/>
+                            <p:inputText id="nome" value="#{contatoMB.contato.nome}" title="Nome" required="true" requiredMessage="Nome invalido"/>
+                            <p:outputLabel value="Telefone:" for="telefone" style="float: right"/>
+                            <p:inputMask id="telefone" value="#{contatoMB.contato.telefone}" title="Telefone" required="true" requiredMessage="Telefone invalido" mask="(999) 9999-9999"/> 
+                            <p:outputLabel value="Aniverssario:" for="dataAniverssario" style="float: right"/>
+                            <p:calendar id="dataAniverssario" locale="pt" showButtonPanel="true" navigator="true" value="#{contatoMB.contato.dataAniverssario}" title="Aniverssario" effect="explode" pattern="dd-MM-yyyy"/>
+                            <p:outputLabel value="Grupo:" for="txt_grupo" style="float: right"/>
+                            <h:selectOneMenu value="#{contatoMB.contato.grupo.descricao}" style="width: 230px" id="txt_grupo" required="true" requiredMessage="Grupo Invalido">
+                                <f:selectItems value="#{grupoMB.listaDeGrupos()}" var="grupo" itemLabel="#{grupo.descricao}" itemValue="#{grupo.id}"/>
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+
+                        <p:commandButton value="Salvar" action="#{contatoMB.Salvar()}" ajax="false" style="float: right;bottom: 35px" icon="ui-icon-disk"/>
+                    </p:panel>
+                </h:form>
+                <h:form id="tbl">
+                    <p:panel header="Lista de Compromissos" style="text-align: center">
+                        <p:dataTable value="#{contatoMB.listaDeContatos()}" var="lc" paginator="true" emptyMessage="Lista Vazia">
+                            <p:column headerText="Codigo">
+                                <h:outputText value="#{lc.id}"/>
+                            </p:column>
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{lc.nome}"/>
+                            </p:column>
+                            <p:column headerText="Telefone">
+                                <h:outputText value="#{lc.telefone}"/>
+                            </p:column>
+                            <p:column headerText="Grupo">
+                                <h:outputText value="#{lc.grupo.descricao}"/>
+                            </p:column>
+                            <p:column >
+                                <p:commandButton  actionListener="#{contatoMB.setContato(lc)}"  update="@all" icon="ui-icon-pencil"/>
+                                <p:commandButton  actionListener="#{contatoMB.Excluir(lc)}" ajax="false" icon="ui-icon-trash"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

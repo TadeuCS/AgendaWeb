@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+        <ui:composition template="./Template.xhtml">
+
+
+
+            <ui:define name="centro">
+                <h:form id="Cad">
+                    <p:panel header="Cadastro de Compromissos">
+                        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                        <h:panelGrid columns="2" style="margin-right: 58%">
+                            <p:outputLabel value="Descricao:" for="txt_descCompromisso" style="float: right;margin-right: 3%"/>
+                            <p:inputText value="#{comprimissoMB.compromissos.descricao}" id="txt_descCompromisso" required="true" requiredMessage="Campo Descrição Invalido"/>
+                            <p:outputLabel value="Data Compromisso:" for="dt_compromisso"/>
+                            <p:calendar value="#{comprimissoMB.compromissos.DT_Compromisso}" locale="pt" id="dt_compromisso" required="true" requiredMessage="Campo Data Compromisso Invalido" pattern="dd-MM-yyyy HH:mm"/>
+                           
+                        </h:panelGrid>
+                        <p:commandButton value="Salvar" action="#{comprimissoMB.Salvar()}" ajax="false" update="@all" style="float: right;bottom: 35px" icon="ui-icon-disk"/>
+                    </p:panel>
+                </h:form>
+                <h:form id="tbl">
+                    <p:panel header="Lista de Compromissos">
+                        <p:dataTable value="#{comprimissoMB.listaDeCompromissos()}" style="text-align: center" var="lc" paginator="true" emptyMessage="Lista Vazia">
+                            <p:column headerText="Status">
+                                <h:outputText value="#{lc.status}"/>
+                            </p:column>
+                            <p:column headerText="Codigo">
+                                <h:outputText value="#{lc.id}"/>
+                            </p:column>
+                            <p:column headerText="Descricao">
+                                <h:outputText value="#{lc.descricao}"/>
+                      :      </p:column>
+                            <p:column headerText="Data" >
+                                <h:outputText value="#{comprimissoMB.getData(lc.DT_Compromisso)}">
+                                    
+                                </h:outputText>
+
+     
+                            </p:column>
+
+                            <p:column >
+                                <p:commandButton  actionListener="#{comprimissoMB.setCompromissos(lc)}"  update="@all" icon="ui-icon-pencil"/>
+                                <p:commandButton  actionListener="#{comprimissoMB.Excluir(lc)}" ajax="false" icon="ui-icon-trash"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

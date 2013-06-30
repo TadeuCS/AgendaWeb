@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.requestContextPath}./resources/css/cssLayout.css"/>
+
+    </h:head>
+    <h:body>
+        <div align="center">
+            <p:layout style="min-height:800px">  
+                <p:layoutUnit position="north" size="150" closable="true" collapsible="true" resizable="true" >  
+                    
+                    <h:form id="north1">
+                        <h1 style="font-size: 50px;font-family: monospace;color: #c4c4c4">Gestor Pessoal</h1>
+
+                    </h:form>
+                    
+                </p:layoutUnit>  
+
+                <p:layoutUnit position="west" size="240" collapsible="true" header="Menu Principal">  
+                    <ui:insert name="menu">
+                        <h:form>
+
+                            <p:panelMenu style="width:230px">  
+                                <p:submenu label="Inicio" >
+                                    <p:menuitem value="Início" url="index.xhtml"/>
+                                </p:submenu>
+                                <p:submenu label="Cadastros" >
+                                    <p:menuitem value="Contato" url="Cad_Contato.xhtml"/>
+                                    <p:menuitem value="Grupo" url="Cad_Grupo.xhtml"/>
+                                </p:submenu>
+                                <p:submenu label="Compromissos" >
+                                    <p:menuitem value="Compromissos" url="Cad_Compromissos.xhtml"/>
+                                </p:submenu>
+                                <p:submenu label="Movimentações" >
+                                    <p:menuitem value="Movimentação" url="Cad_Movimentacao.xhtml"/>
+                                    <p:menuitem value="Listar Movimentações" url="#{movimentosMB.goListMovimentacao()}"/>
+                                </p:submenu>
+                                <p:submenu label="Sobre">
+                                    <p:menuitem value="Sobre" action="Sobre.xhtml"/>
+                                </p:submenu>
+                            </p:panelMenu>
+                        </h:form>
+                    </ui:insert>
+
+                </p:layoutUnit>  
+                <p:layoutUnit position="center">  
+                    <ui:insert name="centro">
+
+                    </ui:insert>
+                </p:layoutUnit>  
+            </p:layout>  
+
+        </div>
+    </h:body>
+</html>
