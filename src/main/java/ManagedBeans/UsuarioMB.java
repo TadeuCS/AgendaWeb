@@ -15,6 +15,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,6 +30,24 @@ public class UsuarioMB {
     UsuarioEJB usuarioEJB;
     EntityManager em;
     private String senha2;
+    private String usuarioLogado;
+    private String senhaLogado;
+
+    public String getUsuarioLogado() {
+        return usuarioLogado;
+    }
+
+    public void setUsuarioLogado(String usuarioLogado) {
+        this.usuarioLogado = usuarioLogado;
+    }
+
+    public String getSenhaLogado() {
+        return senhaLogado;
+    }
+
+    public void setSenhaLogado(String senhaLogado) {
+        this.senhaLogado = senhaLogado;
+    }
 
     public UsuarioMB() {
     }
@@ -41,7 +60,6 @@ public class UsuarioMB {
         this.senha2 = senha2;
     }
 
- 
     public Usuario getUser() {
         return user;
     }
@@ -58,7 +76,7 @@ public class UsuarioMB {
         } else {
             senhaValida = true;
         }
-        if((user.getSenha().length()<6)||(senha2.length()<6)){
+        if ((user.getSenha().length() < 6) || (senha2.length() < 6)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Tamanho minino da senha é 6 caracteres"));
         }
         return senhaValida;
@@ -82,15 +100,40 @@ public class UsuarioMB {
 
     public void salva() {
         if ((validaEmail() == true) && (validaSenha() == true)) {
-            Criptografia();
-            usuarioEJB.salva(user);
+            Criptografia(user.getSenha());
+            goTOLogin();
+            try {
+                
+                usuarioEJB.salva(user);
+                
+            } catch (Exception e) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Usuario Invalido!"));
+            }
         }
     }
-    public String goTOLogin(){
+
+    public String goTOLogin() {
         return "Login.xhtml";
     }
-    public void Criptografia() {
-        String dados = user.getSenha().trim().toUpperCase();
+
+    public String goTOIndex() {
+        String link;
+//        Criptografia(user.getSenha());
+//        Query query = em.createQuery("SELECT u from Usuario u WHERE u.usuario:nome AND u.senha:senha");
+//        query.setParameter("nome", user.getUsuario());
+//        query.setParameter("senha", user.getSenha());
+//        ||(query.getResultList().size() ==1)
+        if (((usuarioLogado.compareToIgnoreCase("ADMIN") == 0) && (senhaLogado.compareToIgnoreCase("ADMIN") == 0))) {
+            link="index.xhml";
+        }else{
+            link="Login.xhml";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Usuario Invalido!"));
+        }
+        return link;
+    }
+
+    public void Criptografia(String dados) {
+        dados= user.getSenha().trim().toUpperCase();
 
 
 

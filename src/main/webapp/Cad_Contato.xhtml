@@ -20,12 +20,12 @@
                             <p:inputText id="nome" value="#{contatoMB.contato.nome}" title="Nome" required="true" requiredMessage="Nome invalido"/>
                             <p:outputLabel value="Telefone:" for="telefone" style="float: right"/>
                             <p:inputMask id="telefone" value="#{contatoMB.contato.telefone}" title="Telefone" required="true" requiredMessage="Telefone invalido" mask="(999) 9999-9999"/> 
-                            <p:outputLabel value="Aniverssario:" for="dataAniverssario" style="float: right"/>
-                            <p:calendar id="dataAniverssario" locale="pt" showButtonPanel="true" navigator="true" value="#{contatoMB.contato.dataAniverssario}" title="Aniverssario" effect="explode" pattern="dd-MM-yyyy"/>
+                            <p:outputLabel value="Aniversário:" for="dataAniversario" style="float: right"/>
+                            <p:calendar id="dataAniversario" locale="pt" showButtonPanel="true" navigator="true" value="#{contatoMB.contato.dataAniverssario}" title="Aniverssario" effect="explode" pattern="dd-MM-yyyy"/>
                             <p:outputLabel value="Grupo:" for="txt_grupo" style="float: right"/>
-                            <h:selectOneMenu value="#{contatoMB.contato.grupo.descricao}" style="width: 230px" id="txt_grupo" required="true" requiredMessage="Grupo Invalido">
+                            <p:selectOneMenu value="#{contatoMB.contato.grupo.descricao}" style="width: 230px" id="txt_grupo" required="true" requiredMessage="Grupo Invalido">
                                 <f:selectItems value="#{grupoMB.listaDeGrupos()}" var="grupo" itemLabel="#{grupo.descricao}" itemValue="#{grupo.id}"/>
-                            </h:selectOneMenu>
+                            </p:selectOneMenu>
                         </h:panelGrid>
 
                         <p:commandButton value="Salvar" action="#{contatoMB.Salvar()}" ajax="false" style="float: right;bottom: 35px" icon="ui-icon-disk"/>

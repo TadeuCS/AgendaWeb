@@ -12,11 +12,17 @@
     <h:body>
         <div align="center">
             <p:layout style="min-height:800px">  
-                <p:layoutUnit position="north" size="150" closable="true" collapsible="true" resizable="true" >  
+                <p:layoutUnit position="north" size="155" closable="true" collapsible="true" resizable="true">  
                     
                     <h:form id="north1">
-                        <h1 style="font-size: 50px;font-family: monospace;color: #c4c4c4">Gestor Pessoal</h1>
+                        <img src="resources/IMG/agenda.jpg" width="130" height="130" alt="agenda" style="float: left"/>
 
+                        
+                        <h:outputText value="Gestor Pessoal" style="font-size: 70px;position: relative;left: 12%;top: 40px;float: left;font-family: monospace;color: #c4c4c4;"/>
+                        <p:panel style="width: 300px;height: 120px;float: right;position: relative;top: 0" header="Login">
+                            Bem Vindo:   <h:outputText value="#{usuarioMB.usuarioLogado}" style="color: blue"/> <p/>
+                           <h:commandButton value="Sair" action="#{usuarioMB.goTOLogin()}" style="bottom: 8px;position: relative"/>
+                        </p:panel>
                     </h:form>
                     
                 </p:layoutUnit>  
@@ -50,7 +56,7 @@
                 </p:layoutUnit>  
                 <p:layoutUnit position="center">  
                     <ui:insert name="centro">
-
+                        
                     </ui:insert>
                 </p:layoutUnit>  
             </p:layout>  
